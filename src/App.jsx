@@ -1,28 +1,14 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import AddTask from "./components/AddTask"
 import Task from "./components/Tasks"
 
 
 function App() {
-  const [tasks, setTasks] = useState([{
-    id:1,
-    title: "Estudar React",
-    description: "Estudar os conceitos básicos de React",
-    isCompleted: false,
-  },
-    {
-      id:2,
-      title: "Estudar Tailwind",
-      description: "Estudar os conceitos básicos de Tailwind",
-      isCompleted: false,
-    },
-    {
-      id:3,
-      title: "Estudar JavaScript",
-      description: "Estudar os conceitos básicos de JavaScript",
-      isCompleted: false,
-    }
-  ]);
+  const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem('tasks')) || []);
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }, [tasks]);
 
 function onTaskClick(taskId) {
   const newTasks = tasks.map((task) => {
