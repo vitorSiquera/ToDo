@@ -17,7 +17,14 @@ function AddTask({onAddTaskClick}){
         onChange={(e) => setDescription(e.target.value)}
         />
         <button 
-        onClick={() => onAddTaskClick(title, description)}
+        onClick={() => {
+            if (!title.trim() || !description.trim()) {
+                return alert("Preencha todos os campos");
+            }
+            onAddTaskClick(title, description)
+            
+        }}       
+        
         className="bg-slate-400 p-2 text-white px-4 py-2 rounded-md font-medium">
             Adicionar Tarefa
         </button>
